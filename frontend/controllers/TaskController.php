@@ -3,23 +3,12 @@
 namespace frontend\controllers;
 
 use frontend\resource\Task;
-use yii\filters\auth\HttpBearerAuth;
-use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 
-class TaskController extends ActiveController
+class TaskController extends ApiController
 {
     public $modelClass = Task::class;
 
-    public function behaviors(): array
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['create', 'update', 'delete'];
-        $behaviors['authenticator']['authMethods'] = [
-            HttpBearerAuth::class,
-        ];
-        return $behaviors;
-    }
 
     /**
      * @param string $action
